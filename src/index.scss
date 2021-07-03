@@ -3,3 +3,43 @@
     align-items: center;
     justify-content: center;
 }
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-size: 1rem;
+    background-color: #F0EFEF;
+    font-family: Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+    height: 100%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "main";
+    grid-template-columns: 1fr;
+    grid-template-rows: 5rem 1fr;
+    height: 100%;
+}
+
+#header {
+    background-color: #0e1011;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+}
+
+.posts-container {
+    margin: 2rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}

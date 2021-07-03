@@ -1,13 +1,19 @@
 import React from 'react'
-import './App.scss'
+import { BrowserRouter, Route } from 'react-router-dom'
+import Header from './components/Header'
+import PostsScreen from './screens/PostsScreen'
 
 const App: React.FC = () => {
-	const logoMoovin =
-		'https://cdn.moovin.com.br/project/manager-panel/img/logo-moovin.svg'
-
 	return (
-		<div className='App'>
-			<img alt='Logo da Moovin' src={logoMoovin} />
+		<div className="grid-container">
+			<BrowserRouter>
+				<Header></Header>
+
+				<main>
+					<Route path='/' component={PostsScreen} exact />
+				</main>
+				
+			</BrowserRouter>
 		</div>
 	)
 }
