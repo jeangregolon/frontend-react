@@ -12,7 +12,7 @@ const App: React.FC = () => {
 				<main>
 					<Route path='/' component={PostsScreen} exact />
 				</main>
-				
+
 			</BrowserRouter>
 		</div>
 	)
