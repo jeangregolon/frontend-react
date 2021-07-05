@@ -1,6 +1,12 @@
 /* Variables */
+// Colors
 $primary_color: #0e1011;
 $secondary_color: #f0efef;
+$tertiary_color: #ffffff;
+$hover_color: #f5f5f5;
+
+// Measures
+$border_thickness: 0.063rem;
 
 /* Layout */
 .App {
@@ -47,7 +53,7 @@ body {
 /* Posts */
 .posts-container {
     margin: 2rem;
-    background-color: white;
+    background-color: $tertiary_color;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
 }
@@ -56,13 +62,12 @@ body {
 .table-container {
     border-radius: 6px;
     overflow: hidden;
-    border: 1px solid $secondary_color;
+    border: $border_thickness solid $secondary_color;
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
-    
 }
 
 .table td,
@@ -77,11 +82,11 @@ body {
 }
 
 .table tr {
-    border-bottom: 1px solid $secondary_color;
+    border-bottom: $border_thickness solid $secondary_color;
 }
 
 tr:hover {
-    background-color: #f5f5f5;
+    background-color: $hover_color;
 }
 
 .table td:first-child {
@@ -100,6 +105,58 @@ tr:hover {
 }
 
 .table tr:last-child:hover {
-    background-color: white;
+    background-color: $tertiary_color;
 }
 
+/* Alert */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    font-size: 2rem;
+}
+
+.alert {
+    padding: 1rem;
+    border: 0.1rem solid transparent;
+    border-radius: 0.5rem;
+}
+
+.alert-info {
+    color: #2020a0;
+    background-color: #e0e0ff;
+}
+
+.alert-danger {
+    color: #a02020;
+    background-color: #ffe0e0e0;
+}
+
+/* Pagination */
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    border: $border_thickness solid black;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.pagination a:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

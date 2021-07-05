@@ -1,16 +1,16 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import Header from './components/Header'
-import PostsScreen from './screens/PostsScreen'
+import PostListScreen from './screens/PostListScreen.jsx'
 
-const App: React.FC = () => {
+function App() {
 	return (
 		<div className="grid-container">
 			<BrowserRouter>
 				<Header></Header>
 
 				<main>
-					<Route path='/' component={PostsScreen} exact />
+					<Route path='/' component={PostListScreen} exact />
 				</main>
 
 			</BrowserRouter>

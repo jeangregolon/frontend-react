@@ -3,8 +3,7 @@ import '../index.scss'
 import { Link } from 'react-router-dom'
 import logoMoovin from '../assets/img/logo.svg'
 
-const Header: React.FC = () => {
-    return (
+export default function Header() {    return (
         <div id='header'>
             <header>
                 <div>
@@ -16,5 +15,3 @@ const Header: React.FC = () => {
         </div>
     )
 }
-
-export default Header
