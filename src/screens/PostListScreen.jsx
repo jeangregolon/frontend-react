@@ -1,20 +1,51 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../index.scss'
-import { RootStateOrAny, useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { listPosts } from "../actions/postActions"
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
 
-// const PostListScreen: React.FC = (props) => {
 export default function PostListScreen() {
 	const dispatch = useDispatch()
-	//  const postList = useSelector((state: RootStateOrAny) => state.postList)
 	const postList = useSelector((state) => state.postList)
 	const { loading, error, posts } = postList
+	const [page, setPage] = useState(1)
+	const [pages, setPages] = useState(4)
+	const [perPage, setPerPage] = useState(20)
+	const [lastPage, setLastPage] = useState(false)
+	const [firstPage, setFirstPage] = useState(true)
 
 	useEffect(() => {
-		dispatch(listPosts())
-	}, [dispatch])
+		dispatch(listPosts(page))
+	}, [dispatch, page])
+
+	function handlePagination(action, param) {
+		setPerPage(posts.meta.pagination.limit)
+		setPages(posts.meta.pagination.pages)
+
+		if (action === 'p' && page > 1) {
+			if (lastPage) {
+				setLastPage(false)
+			}
+			if (page === 2) {
+				setFirstPage(true)
+			}
+			setPage(page - 1)
+		}
+
+		if (action === 'n' && page === pages) {
+			setLastPage(true)
+		} else if (action === 'n' && page < pages) {
+			if (firstPage) {
+				setFirstPage(false)
+			}
+			setPage(page + 1)
+		}
+
+		if (action === 'm') {
+			setPage(param)
+		}
+	}
 
 	return (
 		<div className='posts-container'>
@@ -42,24 +73,41 @@ export default function PostListScreen() {
 										</tr>
 									))
 								}
+							</tbody>
+							<tfoot>
 								<tr>
-									<td>Exibindo {posts.data.length} postagens</td>
+									<td>Exibindo {(perPage * page) - perPage + 1} - {lastPage ? ((pages - 1) * perPage + posts.data.length) : (perPage * page)} de {posts.meta.pagination.total} postagens </td>
 									<td>
 										<div className="pagination">
-										<a className='fa fa-angle-left' href="#"></a>
-											<a href="#">1</a>
-											<a className="active" href="#">2</a>
-											<a href="#">3</a>
-											<a className='fa fa-angle-right' href="#"></a>
+											<button
+												type='button'
+												className={`${firstPage ? 'disabled' : ''}`}
+												onClick={() => handlePagination('p', '')}>
+												<i className='fa fa-angle-left'></i>
+											</button>
+											<button
+												className={`pagination-number ${firstPage ? 'active' : ''}`}
+												type='button'>{`${page === 1 ? 1 : page - 1}`}</button>
+
+											<button
+												className={`pagination-number ${!firstPage && !lastPage ? 'active' : ''}`}
+												type='button'>{`${page === 1 ? 2 : page}`}</button>
+											<button
+												className={`pagination-number ${lastPage ? 'active' : ''}`}
+												type='button'>{`${page === 1 ? 3 : page + 1}`}</button>
+											<button
+												type='button'
+												className={`${lastPage ? 'disabled' : ''}`}
+												onClick={() => handlePagination('n')}>
+												<i className='fa fa-angle-right'></i>
+											</button>
 										</div>
 									</td>
 								</tr>
-							</tbody>
+							</tfoot>
 						</table>
 					</div>
 				</div>)}
 		</div>
 	)
 }
-
-// export default PostListScreen

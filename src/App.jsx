@@ -8,11 +8,9 @@ function App() {
 		<div className="grid-container">
 			<BrowserRouter>
 				<Header></Header>
-
 				<main>
 					<Route path='/' component={PostListScreen} exact />
 				</main>
-
 			</BrowserRouter>
 		</div>
 	)
